@@ -1,0 +1,26 @@
+mat-sidenav-container, mat-sidenav-content, mat-sidenav{
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 170px;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+a:hover{
+  color: lightblue;
+}
+a:active{
+  color: lightgreen;
+}
+
+.nav-caption{
+  display: inline-block;
+  padding-left: 6px;
+}
+.lgb:hover, .lgb:active{
+  color: red;
+}
