@@ -1,3 +1,13 @@
-<p>
-  header works!
-</p>
+<mat-toolbar color="primary">
+  <div fxHide.gt-xs> <button mat-icon-button (click)="onToggle()" >
+    <mat-icon> menu</mat-icon>
+  </button> </div>
+  <div><a routerLink="/"> LOGO </a> </div>
+
+  <div fxFlex fxLayoutAlign="flex-end" fxLayoutGap="4%" fxHide.xs>
+    <a routerLink="/signup">Sign-up</a>
+    <a routerLink="/login">Login</a>
+    <a routerLink="/training">Training</a>
+    <a >Logout</a>
+  </div>
+</mat-toolbar>
