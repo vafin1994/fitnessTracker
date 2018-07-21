@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MatBottomSheet} from '@angular/material';
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
+import {MatDialog} from '@angular/material';
 import {StopTrainingComponent} from './stop-training.component';
 
 @Component({
@@ -8,13 +8,21 @@ import {StopTrainingComponent} from './stop-training.component';
   styleUrls: ['./current-training.component.css']
 })
 export class CurrentTrainingComponent implements OnInit {
+  @Output() trainingExit = new EventEmitter();
   progress = 0;
   timer: number;
+  isTimerWorking = false;
 
-  constructor(private bottomSheet: MatBottomSheet) {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    this.startOrResumeTimer();
+  }
+
+
+  startOrResumeTimer() {
+    this.isTimerWorking = true;
     this.timer = setInterval(() => {
       this.progress += 5;
       if (this.progress >= 100) {
@@ -22,16 +30,26 @@ export class CurrentTrainingComponent implements OnInit {
       }
     }, 1000);
   }
+  onPause() {
+    this.isTimerWorking = false;
+    clearInterval(this.timer);
+  }
 
   onStop() {
     clearInterval(this.timer);
-    const bottomSheetRef = this.bottomSheet.open(StopTrainingComponent, {
-      data: {
-        progress: this.progress
-      }
-    });
-    bottomSheetRef.afterDismissed().subscribe(result => {
-      console.log(result);
-    });
+   const dialogRef = this.dialog.open(StopTrainingComponent, {
+     data: {
+       progress: this.progress
+     }
+   });
+
+
+   dialogRef.afterClosed().subscribe(result => {
+     if (result) {
+       this.trainingExit.emit();
+     } else {
+       this.startOrResumeTimer();
+     }
+   });
   }
 }

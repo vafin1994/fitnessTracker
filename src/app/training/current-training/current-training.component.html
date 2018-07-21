@@ -2,5 +2,10 @@
   <mat-progress-spinner mode="determinate" [value]="progress"></mat-progress-spinner>
   <h1> {{progress }} % </h1>
   <p>Keep on going, you can do it</p>
-  <button mat-raised-button color="accent" (click)="onStop()">Stop</button>
+  <div>
+    <button *ngIf="!isTimerWorking" mat-raised-button color="basic" class="resumeBtn" (click)="startOrResumeTimer()">Resume</button>
+    <button *ngIf="isTimerWorking" mat-raised-button color="primary" (click)="onPause()">Pause</button>
+    <button mat-raised-button color="accent" (click)="onStop()">Stop</button>
+  </div>
+
 </section>
