@@ -1,7 +1,7 @@
 <section class="current-training" fxLayout="column" fxLayoutAlign="center center">
   <mat-progress-spinner mode="determinate" [value]="progress"></mat-progress-spinner>
   <h1> {{progress }} % </h1>
-  <p>Keep on going, you can do it</p>
+  <p>Keep on going, you can do it!</p>
   <div>
     <button *ngIf="!isTimerWorking" mat-raised-button color="basic" class="resumeBtn" (click)="startOrResumeTimer()">Resume</button>
     <button *ngIf="isTimerWorking" mat-raised-button color="primary" (click)="onPause()">Pause</button>
